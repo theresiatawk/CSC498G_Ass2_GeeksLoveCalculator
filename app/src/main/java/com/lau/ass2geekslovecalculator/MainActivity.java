@@ -6,6 +6,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -144,6 +145,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         reset.setVisibility(View.GONE);
         language_icon.setImageDrawable(null);
         result_table.setVisibility(View.GONE);
+        int count = result_table.getChildCount();
+        for (int i = 1; i < count; i++) {
+            View child = result_table.getChildAt(i);
+            if (child instanceof TableRow) ((ViewGroup) child).removeAllViews();
+        }
 
     }
 }
