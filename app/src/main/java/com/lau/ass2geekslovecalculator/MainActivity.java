@@ -8,8 +8,10 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     TextView view_result;
     Button calculate_result;
     String language_selected;
+    ImageView language_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         view_result = (TextView) findViewById(R.id.textResult);
         calculate_result = (Button) findViewById(R.id.calculateButton);
+        language_icon = (ImageView) findViewById(R.id.languageIcon);
     }
 
     @Override
@@ -48,14 +52,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        Toast.makeText(this, "Enter Something",Toast.LENGTH_LONG).show();
     }
     public void calculate(View view){
         Random random = new Random();
         int random_number = random.nextInt(upper_bound-lower_bound) + lower_bound;
         String result = "Your love to " +language_selected+ " language is " +random_number+ " %";
         view_result.setText(result);
-        calculate_result.setVisibility(View.GONE);
-
+        if (language_selected.equalsIgnoreCase( "Python"))
+            language_icon.setImageResource(R.drawable.python);
+        else if (language_selected.equalsIgnoreCase( "Java"))
+            language_icon.setImageResource(R.drawable.java);
+        else if (language_selected.equalsIgnoreCase( "Kotlin"))
+            language_icon.setImageResource(R.drawable.kotlin);
+        else if (language_selected.equalsIgnoreCase( "C"))
+            language_icon.setImageResource(R.drawable.c);
+        else if (language_selected.equalsIgnoreCase( "C++"))
+            language_icon.setImageResource(R.drawable.cplusplus);
+        else if (language_selected.equalsIgnoreCase( "PHP"))
+            language_icon.setImageResource(R.drawable.php);
+        else if (language_selected.equalsIgnoreCase( "HTML"))
+            language_icon.setImageResource(R.drawable.html);
+        else{
+            language_icon.setImageResource(R.drawable.html);
+        }
     }
 }
